@@ -1,5 +1,5 @@
 {
-  "name": "deref",
+  "name": "jsref",
   "version": "1.0.0",
   "description": "Ultra light json-ref dreferencing for browser and node. Supports local, external and custom refs in under 1kb",
   "main": "index.js",
