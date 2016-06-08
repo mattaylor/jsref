@@ -1,0 +1,27 @@
+{
+  "name": "deref",
+  "version": "1.0.0",
+  "description": "Ultra light json-ref dreferencing for browser and node. Supports local, external and custom refs in under 1kb",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattaylor/deref.git"
+  },
+  "keywords": [
+    "jsonref",
+    "ref",
+    "json-ref"
+  ],
+  "author": "mat taylor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattaylor/deref/issues"
+  },
+  "homepage": "https://github.com/mattaylor/deref#readme",
+  "dependencies": {
+    "node-fetch": "^1.5.3"
+  }
+}
