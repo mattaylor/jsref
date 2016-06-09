@@ -19,7 +19,7 @@ function jsref(ob, opts)  {
 
   function extRefs(ref, val) {
     if (!val) val = ob
-    if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref)) ? vals.length : 0
+    if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref))
     var keys = ref.substring(1).split(/[\.\/]/)
     if (!keys[0].length) keys.shift()
     while(val && keys.length) val = val[keys.shift()]
