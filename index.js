@@ -18,7 +18,7 @@ function jsref(ob, opts)  {
 
   function extRefs(ref, val) {
     if (!val) val = ob
-    if (ref[0] != '#') return vals.push(find(ref))
+    if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref))
     var keys = ref.substring(1).split(/[\.\/]/)
     if (!keys[0].length) keys.shift()
     while(val && keys.length) val = val[keys.shift()]
@@ -38,6 +38,8 @@ function jsref(ob, opts)  {
   } 
 
   getRefs(ob)
+  
+  if (opts.lazy) return Promise.resolve(fixRefs(ob))
 
   return Promise.all(vals).then(vals => {
     for (var r in refs) if (!isNaN(refs[r])) refs[r] = vals[refs[r]-1]

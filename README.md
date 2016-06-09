@@ -42,11 +42,12 @@ jsref(ob2, opts).catch(console.log).then(console.log)
    
 ## Options
 
-Param | Descrption | Default
-------|------------|---------
-root  | Url prefix for remote references | `http://localhost/`
-refs  | Object to use to store shared references | `{}`
-deep  | Recursively dreference remote references | `false`
-frag  | JSON Pointer Fragment identifier to extract from external results | `null`
-find  | Function that takes a non local reference and returns a promise of the result | http fetch and extract json 
-$ref  | Property name to identify references | `$ref` 
+Param  | Descrption | Default
+-------|------------|---------
+`root` | Url prefix for remote references | `http://localhost/`
+`refs` | Object to use to store shared references | `{}`
+`deep` | Recursively dreference remote references | `false`
+`frag` | JSON Pointer Fragment identifier to extract from external results | `null`
+`find` | Function that takes a non local reference and returns a promise of the result | http fetch and extract json 
+`$ref` | Property name to identify references | `$ref` 
+`lazy` | Return quickly with external references as promises rather than wait untill all resolved | `false` 
