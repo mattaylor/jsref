@@ -15,7 +15,7 @@ var ob2 = {
   bar: { "$ref": "http://json-schema.org/address#description" },
 }
 
-var opts = { root:'http://avowt.com:7511/api/1.0/avowt/', recur:true, frag: 'result._source' }
+var opts = { root:'http://avowt.com:7511/api/1.0/avowt/', deep:true, frag: 'result._source' }
 //jsref(ob1, opts).catch(console.log).then(res => console.log(JSON.stringify(res)))
 jsref(ob1, opts).catch(console.log).then(console.log)
 //jsref(ob2).then(console.log).catch(console.log)
