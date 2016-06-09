@@ -3,6 +3,7 @@ if (!this.fetch) var fetch = require('node-fetch')
 function jsref(ob, opts)  {
   if (typeof ob !== 'object') return Promise.resolve(ob)
   if (!opts) opts = {}
+  if (!opts.refs) opts.refs = {}
   var root = opts.root || 'http://localhost/'
   var $ref = opts.$ref || '$ref'
   var vals = []
@@ -11,7 +12,7 @@ function jsref(ob, opts)  {
   var find = opts.find || function(url) {
     url = url.indexOf('http') ? root+url : url
     var [url,ref] = url.split('#')
-    ref = ref && ref.length ? ref : opts.frag
+    ref = (ref && ref.length) ? ref : opts.frag
     var rec = fetch(url, opts.http).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
     return opts.deep ? rec.then(rec => rec ? jsref(rec, opts) : rec) : rec
   }
