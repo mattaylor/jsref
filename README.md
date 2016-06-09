@@ -23,18 +23,40 @@ var ob1 = {
 jsref(ob1).then(console.log).catch(console.log)
 ```
 
-Advanced..
+With Options:  
 
 ```
 var ob2 = {
   a: [ { $ref: 'topic/topic1'}, { $ref: '#d.a' } ], 
   b: { $ref: 'topic/topic1' }, 
-  c: { $ref: 'topic/AVUrpOW1MKVbp9OkmBPY' },
-  d: { a: 'hello', b: { $ref: '#a.0' }  }
+  c: { a: 'hello', b: { $ref: '#a.0' }  }
 }
 
-var opts = { root:'http://avowt.com:7511/api/1.0/avowt/', deep:true, frag: 'result._source' }
+var opts = { 
+   root:'http://avowt.com:7511/api/1.0/avowt/', 
+   deep:true,
+   frag: 'result._source'
+}
+
 jsref(ob2, opts).catch(console.log).then(console.log)
+```
+
+With Custom Find.. 
+
+```
+var search = require('elasticsearch')
+var client = new search.Client({host: 'localhost:9200'})
+
+var opts = { 
+   deep: true,
+   find: (url) => {
+     var [type, id] = url.split('/')
+     return client.get({index:'myIndex', type: type, id: id})
+  }
+}
+
+jsref(ob2, opts).catch(console.log).then(console.log)
+
 ```
    __NOTE__: local references __must__ be prefixed by `#`. 
    Old style JSON schema references eg `{ $ref: 'string' }` will not be resolved locally and will be treated as remote url paths__
