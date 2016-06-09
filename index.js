@@ -1,7 +1,7 @@
 if (!this.fetch) var fetch = require('node-fetch')
 
 function jsref(ob, opts) {
-	if (typeof ob !== 'object') return Promise.resolve(ob)
+	if (typeof ob !== 'object') return ob
 	if (!opts) opts = {}
 	opts.refs= opts.refs || {}
 	var root = opts.root || 'http://localhost/'
