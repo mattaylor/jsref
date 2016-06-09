@@ -51,3 +51,4 @@ Param  | Descrption | Default
 `find` | Function that takes a non local reference and returns a promise of the result | http fetch and extract json 
 `$ref` | Property name to identify references | `$ref` 
 `lazy` | Return quickly with external references as promises rather than wait untill all resolved | `false` 
+`http` | HTTP options to pass to `fetch` when resolveing remote references | `null`

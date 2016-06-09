@@ -12,7 +12,7 @@ function jsref(ob, opts)  {
     url = url.indexOf('http') ? root+url : url
     var [url,ref] = url.split('#')
     ref = ref || opts.frag
-    var rec = fetch(url).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
+    var rec = fetch(url, opts.http).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
     return (rec.valueOf && opts.deep) ? rec.then(rec => jsref(rec, opts)) : rec
   }
 
