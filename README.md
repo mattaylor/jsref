@@ -40,6 +40,7 @@ Param  | Descrption  | Default
 `$ref` | Property name used to identify reference values | `$ref` 
 `lazy` | Return quickly without waiting for all external reference promises to resolve | `false` 
 `http` | HTTP options to pass to `fetch` when resolving remote references | `null`
+`like` | Regexp pattern that must against refs (if defined) to restric resolution | `null`
 
 ## Examples 
 
@@ -73,6 +74,7 @@ var ob2 = {
 var opts = { 
   root: 'http://avowt.com:7511/api/1.0/avowt/', 
   deep: true,
+  like: 'topic',
   refs: { 'realm/1': { name: 'realm1' } },
   frag: 'result._source'
 }
@@ -89,7 +91,7 @@ var jsref  = require('jsref')
 
 var ob2 = {
   a: [ { $ref: 'topic/topic1'}, { $ref: '#c.a' } ], 
-  b: { $ref: 'topic/topic1' }, 
+  b: { $ref: 'topic/topic1' },
   c: { a: 'hello', b: { $ref: '#a.0' }  }
 }
 

@@ -23,7 +23,7 @@ function jsref(ob, opts={}) {
   }
   
   function getRefs(ob) {
-    if (ob && ob[$ref]) {
+    if (ob && ob[$ref] && (!opts.like || RegExp(opts.like).test(ob[$ref]))) {
       if (!refs[ob[$ref]]) refs[ob[$ref]] = extRefs(ob[$ref])
     } else for (var i in ob) if (typeof ob[i] === 'object') getRefs(ob[i])
     return ob

@@ -19,6 +19,7 @@ var opts = {
   root:	'http://avowt.com:7511/api/1.0/avowt/',
   refs: { 'realm/1': { name: 'realm1' } },
   deep: true,
+  like: 'topic',
   frag: 'result._source' 
 }
 
