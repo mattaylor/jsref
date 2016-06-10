@@ -67,9 +67,10 @@ var ob2 = {
 }
 
 var opts = { 
-   root:'http://avowt.com:7511/api/1.0/avowt/', 
-   deep:true,
-   frag: 'result._source'
+  root:'http://avowt.com:7511/api/1.0/avowt/', 
+  deep:true,
+  refs: { 'realm/1': { name: 'realm1' } },
+  frag: 'result._source'
 }
 
 jsref(ob2, opts).catch(console.log).then(console.log)
