@@ -30,16 +30,16 @@ Old style JSON schema references eg `{ $ref: 'string' }` will be resolved as rem
    
 ### Options
 
-Param  |Descrption |Default
--------|-----------|---------
-`root` |Url prefix for remote references | `http://localhost/`
-`refs` |Object to use to store shared references | `{}`
-`deep` |Recursively de-reference remote references | `false`
-`frag` |JSON Pointer Fragment identifier to extract from external results | `null`
-`find` |Function that takes a remote reference and returns a promise of the result | http fetch and extract json 
-`$ref` |Property name used to identify reference values | `$ref` 
-`lazy` |Return quickly without waiting for all external reference promises to resolve | `false` 
-`http` |HTTP options to pass to `fetch` when resolving remote references | `null`
+Param  | Descrption | Default
+-------|:---------- |:---------
+`root` | Url prefix for remote references | `http://localhost/`
+`refs` | Object to use to store shared references | `{}`
+`deep` | Recursively de-reference remote references | `false`
+`frag` | JSON Pointer Fragment identifier to extract from external results | `null`
+`find` | Function that takes a remote reference and returns a promise of the result | http fetch and extract json 
+`$ref` | Property name used to identify reference values | `$ref` 
+`lazy` | Return quickly without waiting for all external reference promises to resolve | `false` 
+`http` | HTTP options to pass to `fetch` when resolving remote references | `null`
 
 ## Examples 
 
