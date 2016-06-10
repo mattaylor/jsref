@@ -30,8 +30,8 @@ Old style JSON schema references eg `{ $ref: 'string' }` will be resolved as rem
    
 ### Options
 
-Param  | Descrption | Default
--------|:---------- |:---------
+Param  | Descrption  | Default
+-------| ----------- | ---------
 `root` | Url prefix for remote references | `http://localhost/`
 `refs` | Object to use to store shared references | `{}`
 `deep` | Recursively de-reference remote references | `false`
