@@ -4,11 +4,35 @@ Ultra light quick and flexible json reference resolver with support for json poi
 
 ## Usage
 
-To Install.. 
+On Node.. 
 
 `npm install jsref --save`
 
-Simple..
+In Browser.. 
+
+`<script src="https://cdn.rawgit.com/mattaylor/jsref/master/index.js"><script>`
+
+Then..
+
+`jsref(input, options).then(output => { /* do something */ })`
+   
+__NOTE__: local references __must__ be prefixed by `#`. 
+Old style JSON schema references eg `{ $ref: 'string' }` will not be resolved locally and will be treated as remote url paths__
+   
+## Options
+
+Param  | Descrption | Default
+-------|------------|---------
+`root` | Url prefix for remote references | `http://localhost/`
+`refs` | Object to use to store shared references | `{}`
+`deep` | Recursively de-reference remote references | `false`
+`frag` | JSON Pointer Fragment identifier to extract from external results | `null`
+`find` | Function that takes a remote reference and returns a promise of the result | http fetch and extract json 
+`$ref` | Property name used to identify reference values | `$ref` 
+`lazy` | Return quickly without waiting for all external reference promises to resolve | `false` 
+`http` | HTTP options to pass to `fetch` when resolving remote references | `null`
+
+## Basic Example.
 
 ```
 var jsref = require('jsref')
@@ -23,7 +47,7 @@ var ob1 = {
 jsref(ob1).then(console.log).catch(console.log)
 ```
 
-With Options:  
+## Complex Complex:  
 
 ```
 var ob2 = {
@@ -41,7 +65,7 @@ var opts = {
 jsref(ob2, opts).catch(console.log).then(console.log)
 ```
 
-With Custom Find.. 
+## Custom Find.. 
 
 ```
 var search = require('elasticsearch')
@@ -58,19 +82,3 @@ var opts = {
 jsref(ob2, opts).catch(console.log).then(console.log)
 
 ```
-   __NOTE__: local references __must__ be prefixed by `#`. 
-   Old style JSON schema references eg `{ $ref: 'string' }` will not be resolved locally and will be treated as remote url paths__
-
-   
-## Options
-
-Param  | Descrption | Default
--------|------------|---------
-`root` | Url prefix for remote references | `http://localhost/`
-`refs` | Object to use to store shared references | `{}`
-`deep` | Recursively de-reference remote references | `false`
-`frag` | JSON Pointer Fragment identifier to extract from external results | `null`
-`find` | Function that takes a remote reference and returns a promise of the result | http fetch and extract json 
-`$ref` | Property name used to identify reference values | `$ref` 
-`lazy` | Return quickly without waiting for all external reference promises to resolve | `false` 
-`http` | HTTP options to pass to `fetch` when resolving remote references | `null`
