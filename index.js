@@ -9,6 +9,7 @@ function jsref(ob, opts) {
   var refs = {}
 
   var find = opts.find || function(url) {
+    console.log('find', url)
     url = url.indexOf('http') ? root+url : url
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
@@ -17,6 +18,7 @@ function jsref(ob, opts) {
   }
 
   function extRefs(ref, val) {
+    console.log('extRefs', ref)
     if (opts.refs && opts.refs[ref]) return opts.refs[ref]
     val = val || ob
     if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref))
@@ -27,12 +29,14 @@ function jsref(ob, opts) {
   }
   
   function getRefs(ob) {
+    console.log('getRefs', ob)
     if (ob && ob[$ref]) {
       if (!refs[ob[$ref]]) refs[ob[$ref]] = extRefs(ob[$ref])
     } else for (var i in ob) if (typeof ob[i] === 'object') getRefs(ob[i])
   }
    
   function fixRefs(ob) {
+    console.log('fixRefs', ob)
     if (ob && ob[$ref]) return refs[ob[$ref]] || ob
     for (var k in ob) if (typeof ob[k] === 'object') ob[k] = fixRefs(ob[k])
     return ob
@@ -43,9 +47,10 @@ function jsref(ob, opts) {
   if (opts.lazy) return Promise.resolve(fixRefs(ob))
 
   return Promise.all(vals).then(recs => {
+    console.log('promAll', recs)
     for (var r in refs) if (!isNaN(refs[r])) refs[r] = recs[refs[r]-1]
     return fixRefs(ob)
   })
 }
 
-if (typeof module == 'object') module.exports = jsref
+if (this.module) module.exports = jsref
