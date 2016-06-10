@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattaylor/deref.git"
+    "url": "git+https://github.com/mattaylor/jsref.git"
   },
   "keywords": [
     "jsonref",
@@ -18,9 +18,9 @@
   "author": "mat taylor",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mattaylor/deref/issues"
+    "url": "https://github.com/mattaylor/jsref/issues"
   },
-  "homepage": "https://github.com/mattaylor/deref#readme",
+  "homepage": "https://github.com/mattaylor/jsref#readme",
   "dependencies": {
     "node-fetch": "^1.5.3"
   }

@@ -46,4 +46,4 @@ function jsref(ob, opts={}) {
   })
 }
 
-if (module) module.exports = jsref
+if (typeof module !== 'undefined') module.exports = jsref
