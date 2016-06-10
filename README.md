@@ -4,17 +4,24 @@ Ultra light quick and flexible json reference resolver with support for json poi
 
 ## Usage
 
-On Node.. 
+#### On Node.. 
 
-`npm install jsref --save`
+`$ npm install jsref --save`
 
-In Browser.. 
+```
+require('jsref')
+var inp = { k1: 'v1', k2: { $ref: '#k1' } }
+jsref(inp).then(res => { /* do something */ })
+```
 
-`<script src="https://cdn.rawgit.com/mattaylor/jsref/master/index.js"><script>`
+#### In Browser.. 
 
-Then..
-
-`jsref(input, options).then(output => { /* do something */ })`
+```
+<script src="https://cdn.rawgit.com/mattaylor/jsref/master/index.js"></script>
+<script>
+var inp = { k1: 'v1', k2: { $ref: '#k1' } }
+jsref(inp).then(res => { /* do something */ })
+</script>
    
 __NOTE__: local references __must__ be prefixed by `#`. 
 Old style JSON schema references eg `{ $ref: 'string' }` will be resolved as remote url paths
@@ -32,7 +39,9 @@ Param  | Descrption | Default
 `lazy` | Return quickly without waiting for all external reference promises to resolve | `false` 
 `http` | HTTP options to pass to `fetch` when resolving remote references | `null`
 
-## Basic Example.
+## More Examples 
+
+#### Simple..
 
 ```
 var jsref = require('jsref')
@@ -47,7 +56,7 @@ var ob1 = {
 jsref(ob1).then(console.log).catch(console.log)
 ```
 
-## Complex Complex:  
+#### With Options.  
 
 ```
 var ob2 = {
@@ -65,7 +74,7 @@ var opts = {
 jsref(ob2, opts).catch(console.log).then(console.log)
 ```
 
-## Custom Find.. 
+#### Custom Find.. 
 
 ```
 var search = require('elasticsearch')
