@@ -1,5 +1,5 @@
 var fetch = fetch || require('node-fetch')
-
+/* asdfasdf */
 function jsref(ob, opts={}) {
   if (typeof ob !== 'object') return ob
   var $ref = opts.$ref || '$ref'
