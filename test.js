@@ -1,7 +1,5 @@
 var jsref = require('./index.js')
 
-console.log(jsref)
-
 var ob1 = {
   a: [ { $ref: 'topic/topic1'}, { $ref: '#d.a' } ], 
   b: { $ref: 'topic/topic1' }, 
