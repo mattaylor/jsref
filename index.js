@@ -8,14 +8,18 @@ function jsref(ob, opts={}) {
 
   var find = opts.find || function(url) {
     url = url.indexOf('http') ? (opts.root || 'http://localhost/')+url : url
+    return fetch(url, opts.http).then(res => res.json())
+  }
+
+  function extRefs(url) {
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
-    var rec = fetch(url, opts.http).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
+    var rec = find(url).then(rec => ref ? extRefs('#'+ref,rec) : rec)
     return opts.deep ? rec.then(getRefs) : rec
   }
 
-  function extRefs(ref, val=ob) {
-    if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref))
+  function setRefs(ref, val=ob) {
+    if (ref[0] != '#') return opts.lazy ? extRefs(ref) : vals.push(extRefs(ref))
     var keys = ref.substring(1).split(/[\.\/]/)
     if (!keys[0].length) keys.shift()
     while(val && keys.length) val = val[keys.shift()]
@@ -24,7 +28,7 @@ function jsref(ob, opts={}) {
   
   function getRefs(ob) {
     if (ob && ob[$ref] && (!opts.like || RegExp(opts.like).test(ob[$ref]))) {
-      if (!refs[ob[$ref]]) refs[ob[$ref]] = extRefs(ob[$ref])
+      if (!refs[ob[$ref]]) refs[ob[$ref]] = setRefs(ob[$ref])
     } else for (var i in ob) if (typeof ob[i] === 'object') getRefs(ob[i])
     return ob
   }
