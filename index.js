@@ -10,7 +10,6 @@ function jsref(ob, opts={}) {
     url = url.indexOf('http') ? (opts.root || 'http://localhost/')+url : url
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
-    var rec = fetch(url, opts.http).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
     return fetch(url, opts.http)
       .then(res => res.json())
       .then(rec => ref ? extRefs('#'+ref,rec) : rec)
