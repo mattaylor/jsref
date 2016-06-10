@@ -46,4 +46,4 @@ function jsref(ob, opts={}) {
   })
 }
 
-module.exports = jsref
+module && module.exports = jsref
