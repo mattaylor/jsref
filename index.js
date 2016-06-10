@@ -1,6 +1,6 @@
 var fetch = fetch || require('node-fetch')
 
-function jsref(ob, opt) {
+function jsref(ob, opts) {
   if (typeof ob !== 'object') return ob
   opts = opts || {}
   var root = opts.root || 'http://localhost/'
