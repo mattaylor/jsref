@@ -18,7 +18,7 @@ function jsref(ob, opts={}) {
     if (opts.refs && opts.refs[ref]) return opts.refs[ref]
     if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref))
     var keys = ref.substring(1).split(/[\.\/]/)
-    if (!keys[0][1]) keys.shift()
+    if (!keys[0].length) keys.shift()
     while(val && keys.length) val = val[keys.shift()]
     return val   
   }
