@@ -53,4 +53,4 @@ function jsref(ob, opts) {
   })
 }
 
-if (this.module) module.exports = jsref
+if (typeof module == 'object') module.exports = jsref

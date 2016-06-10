@@ -1,5 +1,7 @@
 var jsref = require('./index.js')
 
+console.log(jsref)
+
 var ob1 = {
   a: [ { $ref: 'topic/topic1'}, { $ref: '#d.a' } ], 
   b: { $ref: 'topic/topic1' }, 
@@ -21,6 +23,7 @@ var opts = {
   deep: true,
   frag: 'result._source' 
 }
+
 jsref(ob1, opts).then(console.log).catch(console.log)
 jsref(ob2).then(console.log).catch(console.log)
 
