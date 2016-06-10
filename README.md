@@ -2,9 +2,9 @@
 
 Ultra light quick and flexible json reference resolver with support for json pointer as well as external and custom resolvers. 
 
-## Usage
+### Usage
 
-#### On Node.. 
+__On NodeJS__ 
 
 `$ npm install jsref --save`
 
@@ -14,7 +14,7 @@ var inp = { k1: 'v1', k2: { $ref: '#k1' } }
 jsref(inp).then(res => { /* do something */ })
 ```
 
-#### In Browser.. 
+__In Browser__
 
 ```
 <script src="https://cdn.rawgit.com/mattaylor/jsref/master/index.js"></script>
@@ -23,11 +23,11 @@ var inp = { k1: 'v1', k2: { $ref: '#k1' } }
 jsref(inp).then(res => { /* do something */ })
 </script>
 ```
-   
+
 __NOTE__: local references __must__ be prefixed by `#`. 
 Old style JSON schema references eg `{ $ref: 'string' }` will be resolved as remote url paths
    
-## Options
+### Options
 
 Param  | Descrption | Default
 -------|------------|---------
@@ -40,9 +40,9 @@ Param  | Descrption | Default
 `lazy` | Return quickly without waiting for all external reference promises to resolve | `false` 
 `http` | HTTP options to pass to `fetch` when resolving remote references | `null`
 
-## More Examples 
+## Examples 
 
-#### Simple..
+__No Options__
 
 ```
 var jsref = require('jsref')
@@ -57,7 +57,7 @@ var ob1 = {
 jsref(ob1).then(console.log).catch(console.log)
 ```
 
-#### With Options.  
+__With Options__
 
 ```
 var ob2 = {
@@ -75,7 +75,7 @@ var opts = {
 jsref(ob2, opts).catch(console.log).then(console.log)
 ```
 
-#### Custom Find.. 
+__Custom Find__
 
 ```
 var search = require('elasticsearch')
