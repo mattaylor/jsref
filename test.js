@@ -26,5 +26,5 @@ var opts = {
 function log(res) { console.log(JSON.stringify(res,null,2)) }
 
 jsref(ob1, opts).then(log).catch(log)
-jsref(ob2).then(log).catch(log)
+//jsref(ob2).then(log).catch(log)
 
