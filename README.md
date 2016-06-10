@@ -22,6 +22,7 @@ jsref(inp).then(res => { /* do something */ })
 var inp = { k1: 'v1', k2: { $ref: '#k1' } }
 jsref(inp).then(res => { /* do something */ })
 </script>
+```
    
 __NOTE__: local references __must__ be prefixed by `#`. 
 Old style JSON schema references eg `{ $ref: 'string' }` will be resolved as remote url paths
