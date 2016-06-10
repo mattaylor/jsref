@@ -54,7 +54,7 @@ var ob1 = {
   new: { '$ref': '#/foo/id'    },
   dot: { '$ref': '#foo.id' },
   fot: { "$ref": "http://json-schema.org/address" },
-  bar: { "$ref": "http://json-schema.org/address#description" },
+  bar: { "$ref": "http://json-schema.org/address#description" }
 }
 
 jsref(ob1).then(console.log).catch(console.log)
