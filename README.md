@@ -8,8 +8,8 @@ __On NodeJS__
 
 `$ npm install jsref --save`
 
-```
-require('jsref')
+```javascript
+var jsref = require('jsref')
 
 var inp = { k1: 'v1', k2: { $ref: '#k1' } }
 jsref(inp).then(res => { /* do something */ })
@@ -17,7 +17,7 @@ jsref(inp).then(res => { /* do something */ })
 
 __In Browser__
 
-```
+```html
 <script src="https://cdn.rawgit.com/mattaylor/jsref/master/index.js"></script>
 <script>
   var inp = { k1: 'v1', k2: { $ref: '#k1' } }
@@ -45,7 +45,7 @@ Param  | Descrption | Default
 
 __No Options__
 
-```
+```javascript
 var jsref = require('jsref')
 
 var ob1 = {
@@ -61,7 +61,9 @@ jsref(ob1).then(console.log).catch(console.log)
 
 __With Options__
 
-```
+```javascript
+var jsref = require('jsref')
+
 var ob2 = {
   a: [ { $ref: 'topic/topic1'}, { $ref: '#d.a' } ], 
   b: { $ref: 'topic/topic1' }, 
@@ -80,9 +82,16 @@ jsref(ob2, opts).catch(console.log).then(console.log)
 
 __Custom Find__
 
-```
+```javascript
 var search = require('elasticsearch')
 var client = new search.Client({host: 'localhost:9200'})
+var jsref  = require('jsref')
+
+var ob2 = {
+  a: [ { $ref: 'topic/topic1'}, { $ref: '#d.a' } ], 
+  b: { $ref: 'topic/topic1' }, 
+  c: { a: 'hello', b: { $ref: '#a.0' }  }
+}
 
 var opts = { 
   deep: true,
@@ -93,5 +102,4 @@ var opts = {
 }
 
 jsref(ob2, opts).catch(console.log).then(console.log)
-
 ```
