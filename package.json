@@ -1,6 +1,6 @@
 {
   "name": "jsref",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Ultra light json-ref resolver for browser and node. Supports local, external and custom refs in under 1.5b",
   "main": "index.js",
   "scripts": {
