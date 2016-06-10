@@ -5,13 +5,13 @@ function jsref(ob, opts={}) {
   var $ref = opts.$ref || '$ref'
   var refs = opts.refs || {}
   var root = opts.root || 'http://localhost/'
-  var vals = []
   var find = url => fetch(url.indexOf('http') ? root+url : url, opts.http).then(res => res.json())
-
+  var vals = []
+  
   function extRefs(url) {
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
-    var rec = find(url).then(rec => ref ? setRefs('#'+ref,rec) : rec)
+    var rec = (opts.find||find)(url).then(rec => ref ? setRefs('#'+ref,rec) : rec)
     return opts.deep ? rec.then(getRefs) : rec
   }
 
@@ -41,7 +41,7 @@ function jsref(ob, opts={}) {
   return Promise.all(vals).then(recs => {
     for (var r in refs) if (!isNaN(refs[r])) refs[r] = recs[refs[r]-1]
     return fixRefs(ob)
-  }).catch(console.log)
+  })
 }
 
 if (typeof module == 'object') module.exports = jsref
