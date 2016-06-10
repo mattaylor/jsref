@@ -2,7 +2,7 @@ if (!this.fetch) var fetch = require('node-fetch')
 
 function jsref(ob, opts) {
   if (typeof ob !== 'object') return ob
-  if (!opts) opts = {}
+  opts = opts || {}
   var root = opts.root || 'http://localhost/'
   var $ref = opts.$ref || '$ref'
   var vals = []
@@ -18,7 +18,7 @@ function jsref(ob, opts) {
 
   function extRefs(ref, val) {
     if (opts.refs && opts.refs[ref]) return opts.refs[ref]
-    if (!val) val = ob
+    val = val || ob
     if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref))
     var keys = ref.substring(1).split(/[\.\/]/)
     if (!keys[0].length) keys.shift()
