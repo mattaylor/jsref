@@ -23,8 +23,7 @@ function jsref(ob, opts={}) {
     while(val && keys.length) val = val[keys.shift()]
     return val   
   }
-
-   
+  
   function getRefs(ob) {
     if (ob && ob[$ref]) {
       if (!refs[ob[$ref]]) refs[ob[$ref]] = extRefs(ob[$ref])
