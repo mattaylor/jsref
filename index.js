@@ -1,8 +1,7 @@
 var fetch = fetch || require('node-fetch')
 
-function jsref(ob, opts) {
+function jsref(ob, opts={}) {
   if (typeof ob !== 'object') return ob
-  opts = opts || {}
   var root = opts.root || 'http://localhost/'
   var $ref = opts.$ref || '$ref'
   var vals = []
@@ -13,18 +12,18 @@ function jsref(ob, opts) {
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
     var rec = fetch(url, opts.http).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
-      return opts.deep ? rec.then(rec => jsref(rec, opts)) : rec
+    return opts.deep ? rec.then(rec => jsref(rec, opts)) : rec
    }
 
-  function extRefs(ref, val) {
+  function extRefs(ref, val=ob) {
     if (opts.refs && opts.refs[ref]) return opts.refs[ref]
-    val = val || ob
     if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref))
     var keys = ref.substring(1).split(/[\.\/]/)
     if (!keys[0].length) keys.shift()
     while(val && keys.length) val = val[keys.shift()]
     return val   
   }
+
    
   function getRefs(ob) {
     if (ob && ob[$ref]) {
@@ -36,7 +35,7 @@ function jsref(ob, opts) {
     if (ob && ob[$ref]) return refs[ob[$ref]] || ob
     for (var k in ob) if (typeof ob[k] === 'object') ob[k] = fixRefs(ob[k])
     return ob
-  } 
+  }
 
   getRefs(ob)
 
@@ -44,7 +43,7 @@ function jsref(ob, opts) {
 
   return Promise.all(vals).then(recs => {
     for (var r in refs) if (!isNaN(refs[r])) refs[r] = recs[refs[r]-1]
-    return fixRefs(ob) 
+    return fixRefs(ob)
   })
 }
 
