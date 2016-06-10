@@ -17,7 +17,7 @@ Then..
 `jsref(input, options).then(output => { /* do something */ })`
    
 __NOTE__: local references __must__ be prefixed by `#`. 
-Old style JSON schema references eg `{ $ref: 'string' }` will not be resolved locally and will be treated as remote url paths__
+Old style JSON schema references eg `{ $ref: 'string' }` will be resolved as remote url paths
    
 ## Options
 
