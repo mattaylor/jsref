@@ -13,13 +13,13 @@ function jsref(ob, opts={}) {
     ref = (ref && ref.length) ? ref : opts.frag
     var rec = fetch(url, opts.http).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
     return opts.deep ? rec.then(rec => jsref(rec, opts)) : rec
-   }
+  }
 
   function extRefs(ref, val=ob) {
     if (opts.refs && opts.refs[ref]) return opts.refs[ref]
     if (ref[0] != '#') return opts.lazy ? find(ref) : vals.push(find(ref))
     var keys = ref.substring(1).split(/[\.\/]/)
-    if (!keys[0].length) keys.shift()
+    if (!keys[0][1]) keys.shift()
     while(val && keys.length) val = val[keys.shift()]
     return val   
   }
