@@ -7,7 +7,7 @@ function jsref(ob, opts={}) {
   var refs = {}
 
   var find = opts.find || function(url) {
-    url = url.indexOf('http') ? opts.root || 'http://localhost/'+url : url
+    url = url.indexOf('http') ? (opts.root || 'http://localhost/')+url : url
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
     var rec = fetch(url, opts.http).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
