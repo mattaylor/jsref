@@ -10,6 +10,7 @@ __On NodeJS__
 
 ```
 require('jsref')
+
 var inp = { k1: 'v1', k2: { $ref: '#k1' } }
 jsref(inp).then(res => { /* do something */ })
 ```
@@ -19,8 +20,8 @@ __In Browser__
 ```
 <script src="https://cdn.rawgit.com/mattaylor/jsref/master/index.js"></script>
 <script>
-var inp = { k1: 'v1', k2: { $ref: '#k1' } }
-jsref(inp).then(res => { /* do something */ })
+  var inp = { k1: 'v1', k2: { $ref: '#k1' } }
+  jsref(inp).then(res => { /* do something */ })
 </script>
 ```
 
@@ -54,6 +55,7 @@ var ob1 = {
   fot: { "$ref": "http://json-schema.org/address" },
   bar: { "$ref": "http://json-schema.org/address#description" },
 }
+
 jsref(ob1).then(console.log).catch(console.log)
 ```
 
@@ -67,8 +69,8 @@ var ob2 = {
 }
 
 var opts = { 
-  root:'http://avowt.com:7511/api/1.0/avowt/', 
-  deep:true,
+  root: 'http://avowt.com:7511/api/1.0/avowt/', 
+  deep: true,
   refs: { 'realm/1': { name: 'realm1' } },
   frag: 'result._source'
 }
@@ -83,10 +85,10 @@ var search = require('elasticsearch')
 var client = new search.Client({host: 'localhost:9200'})
 
 var opts = { 
-   deep: true,
-   find: (url) => {
-     var [type, id] = url.split('/')
-     return client.get({index:'myIndex', type: type, id: id})
+  deep: true,
+  find: (url) => {
+    var [type, id] = url.split('/')
+    return client.get({index:'myIndex', type: type, id: id})
   }
 }
 
