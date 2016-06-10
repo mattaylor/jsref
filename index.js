@@ -11,7 +11,7 @@ function jsref(ob, opts={}) {
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
     var rec = fetch(url, opts.http).then(res => res.json()).then(rec => ref ? extRefs('#'+ref,rec) : rec)
-    return opts.deep ? rec.then(rec => jsref(rec, opts)) : rec
+    return opts.deep ? rec.then(getRefs) : rec
   }
 
   function extRefs(ref, val=ob) {
@@ -27,10 +27,11 @@ function jsref(ob, opts={}) {
     if (ob && ob[$ref]) {
       if (!refs[ob[$ref]]) refs[ob[$ref]] = extRefs(ob[$ref])
     } else for (var i in ob) if (typeof ob[i] === 'object') getRefs(ob[i])
+    return ob
   }
    
   function fixRefs(ob) {
-    if (ob && ob[$ref]) return refs[ob[$ref]] || ob
+    if (ob && ob[$ref]) return fixRefs(refs[ob[$ref]]) || ob
     for (var k in ob) if (typeof ob[k] === 'object') ob[k] = fixRefs(ob[k])
     return ob
   }
@@ -38,8 +39,10 @@ function jsref(ob, opts={}) {
   getRefs(ob)
 
   if (opts.lazy) return Promise.resolve(fixRefs(ob))
-
+  
+  
   return Promise.all(vals).then(recs => {
+    console.log('REFS:', refs)
     for (var r in refs) if (!isNaN(refs[r])) refs[r] = recs[refs[r]-1]
     return fixRefs(ob)
   })
