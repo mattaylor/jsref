@@ -88,7 +88,7 @@ var client = new search.Client({host: 'localhost:9200'})
 var jsref  = require('jsref')
 
 var ob2 = {
-  a: [ { $ref: 'topic/topic1'}, { $ref: '#d.a' } ], 
+  a: [ { $ref: 'topic/topic1'}, { $ref: '#c.a' } ], 
   b: { $ref: 'topic/topic1' }, 
   c: { a: 'hello', b: { $ref: '#a.0' }  }
 }
