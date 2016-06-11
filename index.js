@@ -11,14 +11,14 @@ function jsref(ob, opts={}) {
   function extRefs(url) {
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
-    //var rec = (opts.find||find)(url).then(rec => ref ? setRefs('#'+ref,rec) : rec)
-    var rec = (opts.find||find)(url).then(rec => setRefs('#'+ref,rec))
+    var rec = (opts.find||find)(url).then(rec => ref ? setRefs('#'+ref,rec) : rec)
+    //var rec = (opts.find||find)(url).then(rec => setRefs('#'+ref,rec))
     return opts.deep ? rec.then(getRefs) : rec
   }
 
   function setRefs(ref, val=ob) {
     if (ref[0] != '#') return opts.lazy ? extRefs(ref) : vals.push(extRefs(ref))
-    var keys = ref.substring(1).split(/[\.\/]/)
+    var keys = ref.substr(1).split(/[\.\/]/)
     if (!keys[0].length) keys.shift()
     while(val && keys.length) val = val[keys.shift()]
     return val
