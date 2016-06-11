@@ -11,7 +11,8 @@ function jsref(ob, opts={}) {
   function extRefs(url) {
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
-    var rec = (opts.find||find)(url).then(rec => ref ? setRefs('#'+ref,rec) : rec)
+    //var rec = (opts.find||find)(url).then(rec => ref ? setRefs('#'+ref,rec) : rec)
+    var rec = (opts.find||find)(url).then(rec => setRefs('#'+ref,rec))
     return opts.deep ? rec.then(getRefs) : rec
   }
 
@@ -37,10 +38,13 @@ function jsref(ob, opts={}) {
   }
 
   getRefs(ob)
+
   if (opts.lazy) return Promise.resolve(fixRefs(ob))
-  return Promise.all(vals)
-  .then(recs => for (var r in refs) if (!isNaN(refs[r])) refs[r] = recs[refs[r]-1]
-  .then(() => fixRefs(ob))
- }
+  
+  return Promise.all(vals).then(recs => {
+    for (var r in refs) if (!isNaN(refs[r])) refs[r] = recs[refs[r]-1]
+    return fixRefs(ob)
+  })
+}
 
 if (typeof module == 'object') module.exports = jsref
