@@ -12,7 +12,6 @@ function jsref(ob, opts={}) {
     var [url,ref] = url.split('#')
     ref = (ref && ref.length) ? ref : opts.frag
     var rec = (opts.find||find)(url).then(rec => ref ? setRefs('#'+ref,rec) : rec)
-    //var rec = (opts.find||find)(url).then(rec => setRefs('#'+ref,rec))
     return opts.deep ? rec.then(getRefs) : rec
   }
 
