@@ -17,10 +17,10 @@ var ob2 = {
 
 var opts = { 
   root:	'http://avowt.com:7511/api/1.0/avowt/',
-  refs: { 'realm/1': { name: 'realm1' } },
+  _refs: { 'realm/1': { name: 'realm1' } },
   deep: true,
-  like: 'topic',
-  frag: 'result._source' 
+  _like: 'topic',
+  _frag: 'result._source' 
 }
 
 function log(res) { console.log(JSON.stringify(res,null,2)) }
