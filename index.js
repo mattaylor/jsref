@@ -38,9 +38,7 @@ function jsref(ob, opts={}) {
 
   getRefs(ob)
 
-  if (opts.lazy) return Promise.resolve(fixRefs(ob))
-  
-  return Promise.all(vals).then(recs => {
+  return (opts.lazy) ? Promise.resolve(fixRefs(ob)) : Promise.all(vals).then(recs => {
     for (var r in refs) if (!isNaN(refs[r])) refs[r] = recs[refs[r]-1]
     return fixRefs(ob)
   })
