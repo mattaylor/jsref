@@ -31,7 +31,7 @@ function jsref(ob, opts={}) {
   }
 
   function fixRef(ob) {
-    if (ob && ob[$ref]) return fixRefs(refs[ob[$ref]]) || ob
+    if (ob && ob[$ref]) return fixRef(refs[ob[$ref]]) || ob
     for (var k in ob) if (typeof ob[k] === 'object') ob[k] = fixRef(ob[k])
     return ob
   }
