@@ -4,7 +4,9 @@ function jsref(ob, opts={}) {
   if (typeof ob !== 'object') return ob
   var $ref = opts.$ref||'$ref', refs = opts.refs||{}, root = opts.root||'http://localhost/', vals = []
   var find = url => fetch(url.indexOf('http') ? root+url : url, opts.http).then(res => res.json())
+
   getRef(ob)
+
   return opts.lazy ? fixRef(ob) : Promise.all(vals).then(recs => {
     for (var r in refs) if (!isNaN(refs[r])) refs[r] = recs[refs[r]-1]
     return fixRef(ob)
