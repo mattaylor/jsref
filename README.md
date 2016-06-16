@@ -38,7 +38,7 @@ Param  | Descrption  | Default
 `frag` | JSON Pointer Fragment identifier to extract from external results | `null`
 `find` | Function that takes a remote reference and returns a promise of the result | http fetch and extract json 
 `$ref` | Property name used to identify reference values | `$ref` 
-`lazy` | Return quickly without waiting for all external reference promises to resolve | `false` 
+`lazy` | Return immediately using promises only where necessary for external reference, (otherwise return as promise to fully resolved object) | `false` 
 `http` | HTTP options to pass to `fetch` when resolving remote references | `null`
 `like` | Regexp pattern that must against refs (if defined) to restric resolution | `null`
 

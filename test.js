@@ -1,5 +1,10 @@
 var jsref = require('./index.js')
 
+var ob0 = { 
+  a: [ { $ref: '#b.a' }, { $ref: '#b.b' } ], 
+  b: { a: 'hello', b: 'world', c: { $ref: '#a.0' }  }
+}
+
 var ob1 = {
   a: [ { $ref: 'topic/topic1'}, { $ref: '#d.a' } ], 
   b: { $ref: 'topic/topic1' }, 
@@ -25,6 +30,7 @@ var opts = {
 
 function log(res) { console.log(JSON.stringify(res,null,2)) }
 
+log(jsref(ob0, { lazy:true} ))
 jsref(ob1, opts).then(log).catch(log)
 jsref(ob2).then(log).catch(log)
 
