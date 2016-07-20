@@ -12,7 +12,8 @@ __On NodeJS__
 var jsref = require('jsref')
 
 var inp = { k1: 'v1', k2: { $ref: '#k1' } }
-jsref(inp).then(res => { /* do something */ })
+var res = jsref(inp, { lazy:true } )
+
 ```
 
 __In Browser__
@@ -21,7 +22,7 @@ __In Browser__
 <script src="https://cdn.rawgit.com/mattaylor/jsref/master/index.js"></script>
 <script>
   var inp = { k1: 'v1', k2: { $ref: '#k1' } }
-  jsref(inp).then(res => { /* do something */ })
+  var res = jsref(inp, { lazy:true } )
 </script>
 ```
 
@@ -32,7 +33,7 @@ Old style JSON schema references eg `{ $ref: 'string' }` will be resolved as rem
 
 Param  | Descrption  | Default
 -------| ----------- | ---------
-`root` | Url prefix for remote references | `http://localhost/`
+`root` | Url host and path prefix to prepend remote references | `http://localhost/`
 `refs` | Object to use to store shared references | `{}`
 `deep` | Recursively de-reference remote references | `false`
 `frag` | JSON Pointer Fragment identifier to extract from external results | `null`
@@ -57,7 +58,7 @@ var ob1 = {
   bar: { "$ref": "http://json-schema.org/address#description" }
 }
 
-jsref(ob1).then(console.log).catch(console.log)
+jsref(ob1).catch(console.log).then(res => { /* do something */ })
 ```
 
 __With Options__
@@ -79,7 +80,7 @@ var opts = {
   frag: 'result._source'
 }
 
-jsref(ob2, opts).catch(console.log).then(console.log)
+jsref(ob2, opts).catch(console.log).then(res => { /* do something */ })
 ```
 
 __Custom Find__
@@ -103,5 +104,5 @@ var opts = {
   }
 }
 
-jsref(ob2, opts).catch(console.log).then(console.log)
+jsref(ob2, opts).catch(console.log).then(res => { /* do something */ })
 ```
