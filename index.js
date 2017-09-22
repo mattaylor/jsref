@@ -27,10 +27,12 @@ function jsref(ob, opts={}) {
     return val
   }
 
-  function getRef(ob) {
-    if (ob && ob[$ref] && (!opts.like || RegExp(opts.like).test(ob[$ref]))) {
+  function getRef(ob={}, key) {
+    if (ob[$ref] 
+      && (!opts.keys || opts.keys.includes(key)) 
+      && (!opts.like || RegExp(opts.like).test(ob[$ref]))) {
       if (!refs[ob[$ref]]) refs[ob[$ref]] = setRef(ob[$ref])
-    } else for (var i in ob) if (typeof ob[i] === 'object') getRef(ob[i])
+    } else for (var i in ob) if (typeof ob[i] === 'object') getRef(ob[i], i)
     return ob
   }
 

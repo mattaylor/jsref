@@ -35,6 +35,7 @@ Param  | Descrption  | Default
 -------| ----------- | ---------
 `root` | Url host and path prefix to prepend remote references | `http://localhost/`
 `refs` | Object to use to store shared references | `{}`
+`keys` | Array of object keys to expand | `[]`
 `deep` | Recursively de-reference remote references | `false`
 `frag` | JSON Pointer Fragment identifier to extract from external results | `null`
 `find` | Function that takes a remote reference and returns a promise of the result | http fetch and extract json 
@@ -52,10 +53,10 @@ var jsref = require('jsref')
 
 var ob1 = {
   foo: { id: 'foobar', value: 'bar' },
-  new: { '$ref': '#/foo/id'    },
-  dot: { '$ref': '#foo.id' },
-  fot: { "$ref": "http://json-schema.org/address" },
-  bar: { "$ref": "http://json-schema.org/address#description" }
+  new: { $ref: '#/foo/id'    },
+  dot: { $ref: '#foo.id' },
+  fot: { $ref: "http://json-schema.org/address" },
+  bar: { $ref: "http://json-schema.org/address#description" }
 }
 
 jsref(ob1).catch(console.log).then(res => { /* do something */ })
