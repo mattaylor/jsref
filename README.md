@@ -1,6 +1,6 @@
 # jsref
 
-Ultra light quick and flexible json reference resolver with support for json pointer as well as external and custom resolvers. 
+Fast, flexible and Tiny (>1kb min) json reference resolver with support for json pointers, external refernences, custom resolvers and path or key based filters. 
 
 ### Usage
 
@@ -19,7 +19,7 @@ var res = jsref(inp, { lazy:true } )
 __In Browser__
 
 ```html
-<script src="https://cdn.rawgit.com/mattaylor/jsref/master/index.js"></script>
+<script src="https://cdn.rawgit.com/mattaylor/jsref/master/jsref.min.js"></script>
 <script>
   var inp = { k1: 'v1', k2: { $ref: '#k1' } }
   var res = jsref(inp, { lazy:true } )
@@ -35,14 +35,14 @@ Param  | Descrption  | Default
 -------| ----------- | ---------
 `root` | Url host and path prefix to prepend remote references | `http://localhost/`
 `refs` | Object to use to store shared references | `{}`
-`keys` | Array of object keys to expand | `[]`
+`keys` | Array of object keys to expand (if defined), otherwise expand all keys | `null`
 `deep` | Recursively de-reference remote references | `false`
 `frag` | JSON Pointer Fragment identifier to extract from external results | `null`
 `find` | Function that takes a remote reference and returns a promise of the result | http fetch and extract json 
 `$ref` | Property name used to identify reference values | `$ref` 
 `lazy` | Return immediately using promises only where necessary for external reference, (otherwise return as promise to fully resolved object) | `false` 
 `http` | HTTP options to pass to `fetch` when resolving remote references | `null`
-`like` | Regexp pattern that must against refs (if defined) to restric resolution | `null`
+`path` | Regexp pattern that must against refs paths (if defined) to restric resolution | `null`
 
 ## Examples 
 
@@ -76,7 +76,8 @@ var ob2 = {
 var opts = { 
   root: 'http://avowt.com:7511/api/1.0/avowt/', 
   deep: true,
-  like: 'topic',
+  keys: ['a']
+  path: 'topic',
   refs: { 'realm/1': { name: 'realm1' } },
   frag: 'result._source'
 }
