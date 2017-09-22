@@ -13,8 +13,8 @@ var ob1 = {
 }
 
 var ob2 = {
-  foo: { id: 'foobar', value: 'bar' },
-  new: { $ref: '#/foo/id'    },
+  foo: { id: 'foobar', val1: 'bar1', val2:'bar2' },
+  new: [ { $ref: '#/foo/id' } , { $ref: '#/foo/val1' }, [ { $ref: '#/foo.val2' } ] ] ,
   dot: { $ref: '#foo.id' },
   fot: { $ref: 'http://json-schema.org/address' },
   bar: { $ref: 'http://json-schema.org/address#description' },
